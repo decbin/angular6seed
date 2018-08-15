@@ -37,44 +37,51 @@ describe('LoginComponent', () => {
     tick();
   }));
 
-  // it('初期値は空であること。11', () => {
-  //   fixture.detectChanges();
-  //   const hostElement = fixture.nativeElement;
-  //   const userNameInput: HTMLInputElement = hostElement.querySelector('#userName');
-  //   const passwdInput: HTMLInputElement = hostElement.querySelector('#password');
+  it('use fakeAsync(can not make XHR call)', fakeAsync(() => {
 
-  //   // const userNameErr1 = compiled.querySelector('#userNameErr1');
-  //   // const userNameErr2 = compiled.querySelector('#userNameErr2');
-  //   // expect(userNameErr1).toBeNull();
-  //   // expect(userNameErr2).toBeNull();
-
-  //   // expect(userNameInput.textContent).toBe('');
-  //   // expect(passwdInput.textContent).toBe('');
-  //   fixture.detectChanges();
-  //   userNameInput.value = 'abc';
-  //   userNameInput.dispatchEvent(new Event('input'));
-  //   fixture.whenStable().then(() => {
-  //     fixture.detectChanges();
-  //     expect(userNameInput.value).toEqual('abc');
-  //   });
-  // });
-
-  it('初期値は空であること。121', fakeAsync(() =>{
-    fixture.detectChanges();
     const hostElement = fixture.nativeElement;
     const userNameInput: HTMLInputElement = hostElement.querySelector('#userName');
-
-    const required = hostElement.querySelector('#userNameErr1');
-    const minlength = hostElement.querySelector('#userNameErr2');
+    const passwordInput: HTMLInputElement = hostElement.querySelector('#password');
 
     userNameInput.value = 'abc';
     userNameInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
     tick();
+
+    userNameInput.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    tick();
+
+    const minlength = hostElement.querySelector('#userNameErr2');
+    expect(minlength).toBeTruthy();
+    expect(minlength.textContent).toBe('Input more than 4 character.');
+
+    const required = hostElement.querySelector('#userNameErr1');
+    expect(required).toBeNull();
+
+  }));
+
+  it('use async', async(() => {
+
+    const hostElement = fixture.nativeElement;
+    const userNameInput: HTMLInputElement = hostElement.querySelector('#userName');
+    const passwordInput: HTMLInputElement = hostElement.querySelector('#password');
+
+    userNameInput.value = 'abc';
+    userNameInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    userNameInput.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+
     fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      // expect(userNameInput.textContent).toEqual('abc');
-      expect(userNameInput.value).toEqual('abc');
+      const minlength = hostElement.querySelector('#userNameErr2');
       expect(minlength).toBeTruthy();
+      expect(minlength.textContent).toBe('Input more than 4 character.');
+
+      const required = hostElement.querySelector('#userNameErr1');
+      expect(required).toBeNull();
     });
   }));
+
 });
