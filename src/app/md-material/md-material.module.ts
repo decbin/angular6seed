@@ -10,7 +10,7 @@ import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFor
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   exports: [
     MatCardModule,
@@ -18,7 +18,7 @@ import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFor
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ]
 })
 export class MdMaterialModule { }

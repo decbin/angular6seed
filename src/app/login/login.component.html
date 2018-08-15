@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<div class="content" fxLayout='column' fxFill>
+  <div fxLayout='column' fxLayoutGap='20' fxFlexAlign="center" fxFlexOffset='10'>
+    <mat-form-field>
+      <input id="userName" matInput placeholder="User name" [(ngModel)]="userName" required minlength="4" #uname="ngModel"/>
+      <mat-error id="userNameErr1" *ngIf="uname.errors?.required">Input user name</mat-error> 
+      <mat-error id="userNameErr2" *ngIf="uname.errors?.minlength">Input more than 4 character.</mat-error> 
+    </mat-form-field>
+    <mat-form-field style="padding-top: 20px;">
+      <input id="password" matInput type="password" required placeholder="Password" [(ngModel)]="password" #pwd="ngModel"/>
+      <mat-error *ngIf="pwd.errors?.required">Input password</mat-error> 
+    </mat-form-field>
+  </div>
+</div>
