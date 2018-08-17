@@ -2,3 +2,9 @@
   width: 500px;
   min-height: 300px;
 }
+.mat-input-wrapper {
+  background: gray;
+}
+/deep/ .mat-input-underline {
+  background-color: #FF0000;    /* replace this color with your accent color hex code */
+}

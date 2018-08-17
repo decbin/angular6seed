@@ -1,0 +1,12 @@
+@import "./theme.scss";
+.mat-form-field-underline {
+  background-color: rgb(177, 140, 81) !important;
+}
+
+.mat-form-field-underline.mat-disabled {
+  background-color: transparent !important;
+}
+
+.mat-input-element {
+  background-color: red !important;
+}
